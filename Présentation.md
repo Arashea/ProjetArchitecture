@@ -30,4 +30,8 @@ Depuis, ce langage est devenu de plus en plus populaire. C'est ainsi que Node.js
 * LoopBack
 
 
+# Références bibliographiques
+ 
+ Node.js a partir de <a href="https://nodejs.org/fr/about/" title="nodejs">nodejs.org</a>
+
 <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
