@@ -7,4 +7,4 @@
   
   Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
   
-   ## Express <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" width="50">
+   ## <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" width="100"> Express
