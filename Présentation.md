@@ -1,6 +1,6 @@
 # Présentation des technologies
 
   ## Node.js 
-  ![Image of nodejs](https://www.flaticon.com/free-icon/nodejs_919825?term=nodejs&page=1&position=1)
+  ![Image of nodejs](https://image.flaticon.com/icons/svg/919/919825.svg)
   
   Il s'agit d'un 
