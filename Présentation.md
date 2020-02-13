@@ -1,6 +1,6 @@
 # Présentation des technologies
 
-   ##  <img src="/images/nodejs.png" width="50"> Node.js  
+   ##  <img src="ProjetArchitecture/image/nodejs.png" width="50"> Node.js  
  https://image.flaticon.com/icons/svg/919/919825.svg
   Il s'agit d'un environnement d'éxecution Javascript qui est orienté évènement. 
   Cet environnement laisse une grande place à HTTP, ce qui en fait une base pour les librairies web ou les frameworks.
