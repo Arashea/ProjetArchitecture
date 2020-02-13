@@ -32,7 +32,8 @@ Depuis, ce langage est devenu de plus en plus populaire. C'est ainsi que Node.js
 
 # Exemples d'utilisation des différentes technologies
 
-<img src="https://miro.medium.com/max/5088/1*71nlu7Wn0vXdg2VBxi1gBA.png" width="500"> Node.js est utilisé par 5576 entreprises parmis lesquelles vous pouvez trouver Netflix, Twitter ou encore Uber. <br/>
+<img src="https://miro.medium.com/max/5088/1*71nlu7Wn0vXdg2VBxi1gBA.png" width="500"> <img src="https://github.com/Arashea/ProjetArchitecture/blob/master/image/Capture.PNG" width="500">
+<br/>Node.js est utilisé par 5576 entreprises parmis lesquelles vous pouvez trouver Netflix, Twitter ou encore Uber. <br/>
 <img src="https://github.com/Arashea/ProjetArchitecture/blob/master/image/Capture.PNG" width="500">
 Express, quand à lui, est utilisé par 1289 entreprises comme Twitter ou OpenTable (service de réservation de table dans les restaurants). <br/>
  
