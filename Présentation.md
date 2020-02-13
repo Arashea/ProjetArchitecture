@@ -10,6 +10,7 @@
    
    Il s'agit d'un framework, minimal et flexible, d'application web Node.js.<br/>
    Vous pouvez ainsi :
+   
             * avoir accés à un set de fonctionnalité pour application web et mobile.
             * créer des APIs rapidement.
             * avoir accés à une couche de fonctionnalité fondamentales des applications web (sans vous priver de celle de Node.js)
