@@ -30,6 +30,12 @@ Depuis, ce langage est devenu de plus en plus populaire. C'est ainsi que Node.js
 * LoopBack
 
 
+# Exemples d'utilisation des différentes technologies
+ 
+ Netflix, twitter 
+ Ref: <a href="https://stackshare.io/nodejs" title="stackshare">Stackshare</a><br/>
+https://stackshare.io/nodejs
+
 # Références bibliographiques
  
  Node.js à partir de <a href="https://nodejs.org/fr/about/" title="nodejs">nodejs.org</a><br/>
