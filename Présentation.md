@@ -32,6 +32,11 @@ Depuis, ce langage est devenu de plus en plus populaire. C'est ainsi que Node.js
 
 # Références bibliographiques
  
- Node.js a partir de <a href="https://nodejs.org/fr/about/" title="nodejs">nodejs.org</a>
+ Node.js à partir de <a href="https://nodejs.org/fr/about/" title="nodejs">nodejs.org</a>
+ Express à partir de <a href="https://expressjs.com" title="Expressjs">nodejs.org</a>
+ Visual Studio : <a href="https://code.visualstudio.com/docs/?dv=win64user" title="VSC">Visual Studio</a>
+ Commencer Node.js et Express sous Windows 1 : <a href="https://medium.com/@zibon/getting-started-with-nodejs-and-expressjs-2018-51689dae024b" title="Medium">Medium.com</a>
+ Tutoriel Node.js avec Visual Studio Code : <a href=https://code.visualstudio.com/docs/nodejs/nodejs-tutorial" title="Tuto">VisualStudio.com</a>
+ 
 
-<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
