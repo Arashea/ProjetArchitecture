@@ -31,10 +31,16 @@ Depuis, ce langage est devenu de plus en plus populaire. C'est ainsi que Node.js
 
 
 # Exemples d'utilisation des différentes technologies
+
+Node.js est utilisé par 5576 entreprises parmis lesquelles vous pouvez trouver Netflix, Twitter ou encore Uber. <br/>
+
+Express, quand à lui, est utilisé par 1289 entreprises comme Twitter ou OpenTable (service de réservation de table dans les restaurants). <br/>
  
  Netflix, twitter 
- Ref: <a href="https://stackshare.io/nodejs" title="stackshare">Stackshare</a><br/>
-https://stackshare.io/nodejs
+ Ref: <a href="https://stackshare.io/nodejs" title="stackshare">Stackshare : Node.js</a><br/>
+ Ref: <a href=" https://stackshare.io/expressjs" title="stackshare">Stackshare : Express</a><br/>
+
+
 
 # Références bibliographiques
  
