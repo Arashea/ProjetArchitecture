@@ -1,4 +1,7 @@
-Nous allons basé notre tutoriel sur un environnement sous Windows 10.
+# Objectifs du tutoriel 
+Nous allons basé notre tutoriel sur un environnement sous Windows 10. <br/> 
+A la fin de ce tutoriel, vous serez en mesure de réaliser une API Rest en utilisant MongoDB.<br/>
+Vous serez également en mesure d'avoir une interface web à l'aide d'Express.
 
 # 1er Etape: télécharger les environnements.
 
