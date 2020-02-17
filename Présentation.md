@@ -11,7 +11,7 @@ Depuis, ce langage est devenu de plus en plus populaire. C'est ainsi que Node.js
 
    ## <img src="https://miro.medium.com/max/1200/1*X7a7F-yXRUAGLGLzdlGQMA.png" width="200"> 
   Node.js a été créé en 2009.
-  Il s'agit d'un environnement d'éxecution Javascript qui est orienté évènement. <br/>
+  Il s'agit d'un environnement d'éxecution Javascript qui est orienté évènement. Cet environnement utilise le compilateur Javascript V8 de Google. <br/>
   Cet environnement laisse une grande place à HTTP, ce qui en fait une base pour les librairies web ou les frameworks. <br/>
   Le node.js a un comportement similaire au Javascript dans le sens ou il permet de réaliser des boucles événementielles, sans que l'utilisateur ne s'en rende compte.
   
@@ -37,10 +37,14 @@ Depuis, ce langage est devenu de plus en plus populaire. C'est ainsi que Node.js
 * LoopBack
 
 ### Avantages
-
+Utiliser Express vous donne quelques avantages : 
+* **Réaliser des applications web plus facilement et rapidement** : plus besoin de partir de zéro pour créer votre application. 
+* **Définir des routes** basé sur les méthodes HTTP et URL : Vous pouvez désormais vérifier des URL beaucoup plus facilement qu'avec simplement Node.js. 
+* S'intègre facilement avec des moteurs de template comme Jade, Vash.
+* **Connexion facile avec MongoDB,MySQL** etc. 
 
 # Exemples d'utilisation des différentes technologies
-
+![](https://miro.medium.com/max/5088/1*71nlu7Wn0vXdg2VBxi1gBA.png) ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/Capture.PNG)
 <img src="https://miro.medium.com/max/5088/1*71nlu7Wn0vXdg2VBxi1gBA.png" width="500"> <img src="https://github.com/Arashea/ProjetArchitecture/blob/master/image/Capture.PNG" width="500">
 <br/>Node.js est utilisé par 5576 entreprises parmis lesquelles vous pouvez trouver Netflix, Twitter ou encore Uber. <br/>
 
@@ -59,6 +63,9 @@ Express, quand à lui, est utilisé par 1289 entreprises comme Twitter ou OpenTa
  Visual Studio : <a href="https://code.visualstudio.com/docs/?dv=win64user" title="VSC">Visual Studio</a><br/>
  Commencer Node.js et Express sous Windows 1 : <a href="https://medium.com/@zibon/getting-started-with-nodejs-and-expressjs-2018-51689dae024b" title="Medium">Medium.com</a><br/>
  Tutoriel Node.js avec Visual Studio Code : <a href="https://code.visualstudio.com/docs/nodejs/nodejs-tutorial" title="Tuto">VisualStudio.com </a> <br/>
+ node js avantages :  https://www.supinfo.com/articles/single/6191-nodejs   +   https://www.smooth-code.com/articles/6-raisons-de-choisir-node-js  <br/>
+ Express https://www.tutorialsteacher.com/nodejs/expressjs  <br/>
+ 
  
 
 
