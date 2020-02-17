@@ -4,6 +4,12 @@ A la fin de ce tutoriel, vous serez en mesure de réaliser une API Rest en utili
 Vous serez également en mesure d'avoir une interface web à l'aide d'Express.
 
 # 1er Etape: télécharger les environnements.
+Lors de cette étape, nous allons télécharger les logiciels suivants : 
+* <a href="https://nodejs.org/fr/download/" title="Tuto">Nodejs.org </a> télécharger la version qui correspond à votre système d'exploitation
+* Express js
+* MongoDB
+* Visual studio code
+
 
 Aller sur <a href="https://nodejs.org/fr/download/" title="Tuto">Nodejs.org </a> et télécharger la version qui correspond à votre système d'exploitation. 
 Nous choisirons ici celle de Windows 64bits. 
