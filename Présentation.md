@@ -1,6 +1,7 @@
 # Introduction
 
-Nous allons vous présenter l'environnement node.js ainsi que Express.
+Dans le cadre de notre projet, il nous a été proposé de réaliser un projet Node.Js en utilisant le framework Express.<br/>
+N'ayant jamais étudié cet environnement, nous avons réalisé quelques recherches sur ces sujets que l'on vous présente ci-après. Vous trouverez ainsi le descriptif de ces technologies ainsi que les points forts de chacune de ces technologies.
 
 # Mise en contexte 
 
