@@ -44,7 +44,8 @@ Utiliser Express vous donne quelques avantages :
 * **Connexion facile avec MongoDB,MySQL** etc. 
 
 # Exemples d'utilisation des différentes technologies
-![](https://miro.medium.com/max/5088/1*71nlu7Wn0vXdg2VBxi1gBA.png) ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/Capture.PNG)
+<img align="right" width="400"  src="https://miro.medium.com/max/5088/1*71nlu7Wn0vXdg2VBxi1gBA.png">
+<img align="left" width="400"  src="https://github.com/Arashea/ProjetArchitecture/blob/master/image/Capture.PNG">
 <img src="https://miro.medium.com/max/5088/1*71nlu7Wn0vXdg2VBxi1gBA.png" width="500"> <img src="https://github.com/Arashea/ProjetArchitecture/blob/master/image/Capture.PNG" width="500">
 <br/>Node.js est utilisé par 5576 entreprises parmis lesquelles vous pouvez trouver Netflix, Twitter ou encore Uber. <br/>
 
