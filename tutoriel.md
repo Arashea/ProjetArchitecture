@@ -10,7 +10,7 @@ Lors de cette étape, nous allons télécharger les logiciels suivants :
 * MongoDB * 
 
 ## Comment configurer MongoDB 
-Aller sur <a href="https://www.mongodb.com" title="Tuto">MongoDB </a> 
+Aller sur <a href="https://www.mongodb.com" title="Tuto">MongoDB </a> ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/MongoDB.PNG)
 
 
 Aller sur <a href="https://nodejs.org/fr/download/" title="Tuto">Nodejs.org </a> et télécharger la version qui correspond à votre système d'exploitation. 
