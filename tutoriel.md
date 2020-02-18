@@ -1,34 +1,47 @@
 # Objectifs du tutoriel 
-Nous allons basé notre tutoriel sur un environnement sous Windows 10. Vous devrez utiliser le shell de Windows.  <br/> 
-A la fin de ce tutoriel, vous serez en mesure de réaliser une API Rest en utilisant MongoDB.<br/>
-Vous serez également en mesure d'avoir une interface web à l'aide d'Express.
+Dans ce tutoriel, nous vous présenterons comment créer un site web permettant de rpésenter une base de données de films. Nous allons basé notre tutoriel sur un environnement sous Windows 10. Vous devrez utiliser le terminal de Visual Studio Code.  <br/> 
+A la fin de ce tutoriel, vous serez en mesure de recréer un site web en utilisant Node.js, le framework Express, ainsi que MongoDB. 
 
-# 1er Etape: télécharger les environnements.
+
+# Etape 1 : télécharger les environnements.
 Lors de cette étape, nous allons télécharger les logiciels suivants : 
-* <a href="https://nodejs.org/fr/download/" title="Tuto">Nodejs.org </a>  : télécharger la version qui correspond à votre système d'exploitation
-* <a href="https://code.visualstudio.com/download" title="Tuto">Visual studio code </a> 
-* MongoDB * 
+* <a href="https://nodejs.org/fr/download/" title="Tuto">Nodejs.org </a>  : télécharger la version qui correspond à votre système d'exploitation. Nous choisirons ici celle de Windows 64bits. 
+* Vous pouvez prendre l'IDE de votre choix supportant Node.js, dans notre cas nous utiliserons :  <a href="https://code.visualstudio.com/download" title="Tuto">Visual studio code </a> 
+* MongoDB 
+
 
 ## Comment configurer MongoDB 
 Aller sur <a href="https://www.mongodb.com" title="Tuto">MongoDB </a> ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/MongoDB.PNG)
 
+Cliquer sur l'icone en haut à droite de la page nommé : **Try Free** et rentrer les informations nécessaires à la création de votre compte:
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/Inscription.PNG)
 
-Aller sur <a href="https://nodejs.org/fr/download/" title="Tuto">Nodejs.org </a> et télécharger la version qui correspond à votre système d'exploitation. 
-Nous choisirons ici celle de Windows 64bits. 
+Une fois votre compte créé, MongoDB vous prpose 3 formules, dans notre cas la formule gratuite sera suffissante: 
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/next.PNG)
+Ainsi, nous avons accès à une base de données sur le cloud. <br/> 
+MongoDB vous porpose alors de séléctionner les propriétés de votre espace comme sur la photo suivante.  Dans notre cas, nous avons choisi d'utiliser le serveur AWS d'Amazon, de choisir le serveur situé en Virginie (plus proche de notre localisation) et de renommer le Cluster par ProjetNode. 
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/parametres.PNG)
+Une fois la sélection faite, vous pouvez cliquer sur **Create cluster**. Une fois cela fait, votre espace prendra quelques minutes pour être complètement fonctionnel. Nous utiliserons ce temps de mise en place pour commencer le projet. 
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/miseenplace.PNG)
+<br/> 
 
-Une fois cette installation réussie, aller sur <a href="https://expressjs.com/fr/starter/installing.html" title="Tuto">Expressjs.com </a>  <br/>
+## Création de notre projet 
 
-Une fois toute les installations requises effectuées, vous pouvez créer un dossier dans le répertoire de votre choix. 
-Ouvrer ensuite Windows Power Shell et placer vous dans votre dossier à l'aide de la commande suivante : 
-```
-changer de repertoire 
-``` 
+Une fois toute les installations requises effectuées, vous pouvez créer un dossier intitulé projetFilm dans le répertoire de votre choix. 
+<br/>
+Ouvrer le dossier dans Visual Studio Code: 
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCFolder.PNG)
+Une fenêtre apparaitra et vous pourrez ainsi ouvrir le dossier que vous avez créé précedement.<br/>
+Dans VSC, vous aller ouvrir le terminal: 
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCTerminal.PNG)
 
-Puis taper la commande suivante :
+Vous serez donc situer dans le dossier créé:
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCTerminalview.PNG)
+Taper la commande suivante qui vous permettra d'initialiser le projet à l'aide de npm (node package manager):
 ```
 npm init 
 ``` 
-ensuite écriver dans le shell : 
+ensuite écriver dans le terminal : 
 ```
 npm install --save express mongoose nunjuncks bootstrap
 ``` 
