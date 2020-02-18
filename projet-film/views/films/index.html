@@ -1,0 +1,17 @@
+{% extends"layout.html"%} 
+
+{% block content %}
+    <h2>Films</h2>
+
+    {% for p in films %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{p.titre}}
+            </div>
+            <div class="panel-content">
+                {{p.synopsis}}
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

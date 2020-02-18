@@ -5,8 +5,15 @@ N'ayant jamais étudié cet environnement, nous avons réalisé quelques recherc
 
 # Mise en contexte 
 
-Le Javascript a été créé en 1995 par Netscape afin de pouvoir manipuler les pages web. <br/>
-Depuis, ce langage est devenu de plus en plus populaire. C'est ainsi que Node.js est apparu afin de gérer le coté serveur.
+Le Javascript a été créé en 1995 par Netscape afin de pouvoir manipuler les pages web en Frontend. <br/>
+Depuis, ce langage est devenu de plus en plus populaire. C'est ainsi que Node.js est apparu afin de gérer le code côté serveur.
+
+<img src="https://w3techs.com/diagram/history_technology/ws-nodejs"> 
+La figure ci-dessus vous montre l'utilisation du Node.js dans les sites web. Nous pouvons voir que son utilisation est en constante augmentation depuis un an. 
+<br/>
+De plus, en comparaison avec d'autres serveurs web, Node.js est celui qui est utilisé par les sites de haut traffic. 
+<img src="https://w3techs.com/diagram/market_technology/ws-nodejs"> 
+
 
 # Présentation des technologies
 
@@ -27,8 +34,8 @@ Depuis, ce langage est devenu de plus en plus populaire. C'est ainsi que Node.js
    ## <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" width="200"> 
   
   A la suite de Node.js, Express a vu le jour en 2010.
-  Il s'agit d'un framework, minimal et flexible, d'application web Node.js.<br/>
-  Vous pouvez ainsi :
+Il s'agit d'un framework, minimal et flexible,d'application web Node.js.<br/>
+ Vous pouvez ainsi :
 * avoir accés à un set de fonctionnalité pour application web et mobile.
 * créer des APIs rapidement.
 * avoir accés à une couche de fonctionnalité fondamentales des applications web (sans vous priver de celle de Node.js)
@@ -41,7 +48,7 @@ Depuis, ce langage est devenu de plus en plus populaire. C'est ainsi que Node.js
 Utiliser Express vous donne quelques avantages : 
 * **Réaliser des applications web plus facilement et rapidement** : plus besoin de partir de zéro pour créer votre application. 
 * **Définir des routes** basé sur les méthodes HTTP et URL : Vous pouvez désormais vérifier des URL beaucoup plus facilement qu'avec simplement Node.js. 
-* S'intègre facilement avec des moteurs de template comme Jade, Vash.
+* S'intègre facilement avec des moteurs de template comme Nunjucks, Jade, Vash.
 * **Connexion facile avec MongoDB,MySQL** etc. 
 
 # Exemples d'utilisation des différentes technologies
@@ -61,6 +68,7 @@ Express, quand à lui, est utilisé par 1289 entreprises comme Twitter ou OpenTa
  
  Node.js à partir de <a href="https://nodejs.org/fr/about/" title="nodejs">nodejs.org</a><br/>
  Express à partir de <a href="https://expressjs.com" title="Expressjs">nodejs.org</a><br/>
+ Rapport sur Node.js par <a href="https://w3techs.com/technologies/details/ws-nodejs" title="VSC">W3Techs</a><br/>
  Visual Studio : <a href="https://code.visualstudio.com/docs/?dv=win64user" title="VSC">Visual Studio</a><br/>
  Commencer Node.js et Express sous Windows 1 : <a href="https://medium.com/@zibon/getting-started-with-nodejs-and-expressjs-2018-51689dae024b" title="Medium">Medium.com</a><br/>
  Tutoriel Node.js avec Visual Studio Code : <a href="https://code.visualstudio.com/docs/nodejs/nodejs-tutorial" title="Tuto">VisualStudio.com </a> <br/>

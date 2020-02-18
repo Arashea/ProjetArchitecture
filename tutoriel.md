@@ -85,10 +85,45 @@ La page devrait afficher *Votre application fonctionne*	:grinning: ![](https://g
 
 Une fois cette vérification faite, vous pouvez enlever les lignes de app.get. <br/>
 
-Ensuite, nous allons nous connecter à la base de donnée mongoDB, cela nous permet de se connecter à la base de donnée qui se situe sur le serveur localhost. (attention, prenez garde à ce que mongoDB soit ouvert lors de cette manipulation) : 
+Ensuite, nous allons nous connecter à la base de donnée mongoDB.Pour ce faire, nous allons utilisé la base de données que nous avons créée sur le cloud. Retourner sur la page de mongoDB, normalement vous y trouverez le cluster que vous avez créé précedemment. 
+Cliquez sur Connect puis remplissez les champs demandés.<br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/MongoDBConnect.PNG)
+<br/>
+ Concernant l'adresse IP,choisissez votre IP actuelle pour plus de simplicité. (N'oubliez pas de cliquer sur *Add IP* )Puis créez le login et mot de passse de votre utilisateur Admin.(ces données vous permettront de vous connecter à la base de données)
+<br/>
+Cliquez ensuite sur *Choose a connection method* afin de choisir la méthode de connexion: 
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/MongoDBMethod.PNG)
+
+Ensuite cliquez sur *Connect your application* <br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/ConnectApp.PNG)
+<br/>
+Cette page devrait apparaitre, vérifiez bien que votre driver est bien Node.js puis copier la ligne du dessous en cliquant sur *copy*. Ce champs vous permettra de vous connecter à la base de donnée en remplaçant le champs **password** par votre mot de passe. <br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/MongoDBCopy.PNG)
+<br/>
+Retournez sur votre fichier app.js et insérez les lignes suivantes à la suite des imports de librairies :
+``` javascript
+//Connexion à la base de données
+mongoose.connect('<VOTRE LIEN>',() =>{
+  console.log('connection à la database');
+});
 ``` 
-mongoose.connect('mongodb://localhost/baseFilm')
+Afin de sécuriser cette connexion ( car ici votre login et votre mot de passe apparaissent en clair), nous allons télécharger le package dotenv qui permet de créer des variables globales dont la valeur n'est visible que par votre application. Pour ce faire, tapez les lignes suivantes dans votre terminal 
+ ``` javascript
+npm install dotenv
 ``` 
+Une fois, ce package installé, créez un fichier .env à la racine de votre projet et inscrivez la ligne suivante :
+```
+DB_CONNECTION=<VOTRE LIEN>
+```
+Retournez sur le fichier app.js et ecriver cela : 
+```javascript
+require('dotenv/config');
+//mongoose.connect('mongodb://localhost/film');
+mongoose.connect(process.env.DB_CONNECTION,() =>{
+  console.log('connection à la database');
+});
+```
+
 Dans VSC, créez un nouveau dossier intitulé views. Puis dans ce nouveau dossier, nous allons créer deux nouveaux dossier et un fichier : 
 * :file_folder: Films
 * :file_folder: Type
@@ -135,3 +170,124 @@ Cependant, nous n'avons pas accès à bootstrap.min.css, pour y avoir accès nou
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 ```
 *__dirname* réfère au répertoire en cours où se trouve app.js et ce middleware a pour but d'assimiler le chemin /css au chemin donnée en paramètres.
+<br/>
+Créez ensuite un nouveau dossier à la racine de l'application que l'on va appelé models et qui nous servira à definir nos modèles de données. Nous avons deux types de données, c'est pourquoi il faudra créer dans ce répertoire deux fichiers :
+* Films.js
+* Type.js
+<br/>
+
+Dans le fichier Films.js, vous allez créer le schéma des films. Cela permettra de pouvoir vérifier les caractères lors de leur ajout à la base de données. 
+``` javascript
+var mongoose = require('mongoose');
+
+var filmSchema = new mongoose.Schema({
+    titre: String,
+    affiche: String, // chemin de l'image
+    synospsis: String,
+    date: String,
+    realisateur:String,
+    types:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Type' // ces objectsId sont des ref du modele type
+        }
+    ]
+});
+
+var Films = mongoose.model('Films',filmSchema);
+
+module.exports = Films; 
+```
+Le champs *type* est un tableau car un film peut avoir plusieurs types (horreur et animation par exemple). Il fera lien avec les types qui seront definis dans le fichier Types.js.
+<br/>
+*module.exports* vous permettra d'exporter le modèle que vous venez de définir, afin de le réutiliser dans d'autres parties de votre applications. 
+<br/>
+Ensuite, il faut faire de même avec le fichier Types.js :
+```javascript
+var mongoose =require('mongoose');
+
+var typeSchema = new mongoose.Schema({
+    name: String
+});
+
+typeSchema.virtual('Films',{
+    ref:'Films',
+    localField: '_id', // id du modèle Types
+    foreignField: 'types' // le champs types du modèle films
+});
+
+var Types = mongoose.model('Types',typeSchema);
+
+module.exports = Types;
+``` 
+*typeSchema.virtual* permet de créer un champs non-stocké dans la base de données. Il peut s'agir dans champs calculé ou définir des relations entres plusieurs types. Ici, on cherche à définir un lien entre films et types.
+<br/>
+
+Ensuite, vous allez créer un nouveau dossier à la racine du projet que vous nommerez **routes** . Dans ce dossier, vous allez créer deux fichiers :
+* films.js
+* types.js
+
+Ces deux fichiers permettront de distinguer les routes pour les films et celles pour les types.
+Dans le fichier films.js: écrivez : 
+``` javascript
+// instancie un routeur
+var router = require('express').Router();
+
+//exporter le routeur pour le réutiliser
+module.exports = router;
+```
+Le router nous permettra d'executer des actions en fonction du chemain (path) appelé dans le navigateur. 
+<br/>
+Faites de même pour le fichier types.js : 
+``` javascript
+// instancie un routeur
+var router = require('express').Router();
+
+//exporter le routeur pour le réutiliser
+module.exports = router;
+```
+Une fois cela fait, retourner dans le fichier app.js, afin d'y ajouter quelques lignes : 
+```javascript
+//récuperer les différents modèles créés
+ require('./models/Films');
+ require('./models/Types');
+
+//utiliser le router en fonction des adresses demandées dans le navigateur
+app.use('/',require('./routes/films'));
+app.use('/types', require('./routes/types'));
+``` 
+Ainsi, une fois nos router déclarés, nous pouvons compléter les fichiers les concernants. Ainsi, dans le fichier films.js, veuillez écrire : 
+``` javascript
+var Films = require('./../models/Films);
+//instancie la page  d'acceuil
+router.get('/', (req,res)=> {
+    Films.find({}).populate('types').then(films => {
+        res.render('films/index.html',{films: films});
+    })
+});
+```
+*.find({})* signifie que nous voulons récuperer tous les films de la base de données. *populate* permet de dire a mongoose de recuperer tous les types associés aux films. *.res.render* permet de faire le rendu de la page films/index.html avec la variable films. 
+<br/>
+Cette vue n'étant pas encore créée, nous allons le faire. Dans le fichier views -> films, créez un fichier **index.html** .
+Dans ce fichier, vous écrivez : 
+``` html
+<! -- herite du fichier.html --> 
+{% extends"layout.html"%} 
+
+{% block content %}
+    <h2>Films</h2>
+
+    {% for p in films %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{p.titre}}
+            </div>
+            <div class="panel-content">
+                {{p.synopsis}}
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+```
+On change alors le contenu du block content inscrit dans la page layout.html . Ce que vous venez d'écrire permettra de réaliser une boucle sur tous les films contenus dans votre base de données et d'en afficher le titre et la synopsis. 
