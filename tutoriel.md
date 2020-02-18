@@ -87,19 +87,51 @@ Une fois cette vérification faite, vous pouvez enlever les lignes de app.get. <
 
 Ensuite, nous allons nous connecter à la base de donnée mongoDB, cela nous permet de se connecter à la base de donnée qui se situe sur le serveur localhost. (attention, prenez garde à ce que mongoDB soit ouvert lors de cette manipulation) : 
 ``` 
-mongoose.connect('mongodb://localhost/basededonnee')
+mongoose.connect('mongodb://localhost/baseFilm')
 ``` 
-Dans VSC, créer un nouveau dossier intitulé views. Puis dans ce nouveau dossier, nous allons créer deux nouveaux dossier et un fichier : 
-* :file_folder: pokemons
-* :file_folder: types
+Dans VSC, créez un nouveau dossier intitulé views. Puis dans ce nouveau dossier, nous allons créer deux nouveaux dossier et un fichier : 
+* :file_folder: Films
+* :file_folder: Type
 * :page_facing_up: layout.html
 
+Le dossier Films correspondra aux vues liés à nos films et le dossier Type fera référence aux vues liées au type de film (animation, horreur ...). Le fichier layout correpondra au ficher dont hériterons toute nos vues. 
+<br/>
 Afin d'utiliser nunjuncks comme moteur de template, il faut ajouter cette ligne dans app.js :
-``` 
-var nunjuncks = require('nunjuncks');
+``` javascript
+var nunjucks = require('nunjucks');
 
-nunjuncks.configure('views',{
-  autoescape : true,
+//Configurer nunjucks
+nunjucks.configure('views',{
+  // echapper tout les caractères html présent dans les variables
+  autoescape: true,
+
   express: app
 });
 ``` 
+Une fois, ces lignes ajoutées, ouvrer le fichier layout.html et écrivez ceci : 
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>Ma base de films</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/boostrap.min.css">
+</head>
+<body>
+    <h1>Ma super base de films</h1>
+    {% block content%}{% endblock%}
+    <hr>
+    <div class="text-center">
+        Copyright Architecture 2019
+    </div>
+</body>
+</html>
+``` 
+La ligne comportant le *block content* est une ligne spécialisé pour nunjucks. En effet, ce moteur de template sait que c'est à ce moment que commence un block. Cela nous permettra d'utiliser le layout plusieurs fois et de changer uniquement le contenu du block content. Cela permet de ne pas dupliquer toute la partie au dessus.  
+<br/>
+Cependant, nous n'avons pas accès à bootstrap.min.css, pour y avoir accès nous devons aller dans le fichier app.js: 
+```javascript
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+```
+*__dirname* réfère au répertoire en cours où se trouve app.js et ce middleware a pour but d'assimiler le chemin /css au chemin donnée en paramètres.
