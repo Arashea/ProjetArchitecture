@@ -35,39 +35,53 @@ Une fenêtre apparaitra et vous pourrez ainsi ouvrir le dossier que vous avez cr
 Dans VSC, vous aller ouvrir le terminal: 
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCTerminal.PNG)
 
-Vous serez donc situer dans le dossier créé:
+Vous serez donc situés dans le dossier créé:
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCTerminalview.PNG)
 Taper la commande suivante qui vous permettra d'initialiser le projet à l'aide de npm (node package manager):
 ```
 npm init 
 ``` 
-ensuite écriver dans le terminal : 
+**Attention** : il se peut que le terminal de Visual Studio Code ne soit pas assimiler au terminal de node, redémarrer VSC si cela ne fonctionne pas, redémarrer l'ordinateur. <br/>
+Nous allons ensuite configurer le projet, nous allons garder toute les valeurs par défaut ( appuyer sur entrée jusqu'à valider la création du projet)
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCConfig.PNG)
+Un fichier nommé *package.json* sera crée dans votre dossier.  Il comportera les valeurs pas défaut de notre projet.
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCPackagejson.PNG)
+<br/>
+Dans le cadre de notre projet, nous aurons besoin d'installer le framework Express pour faciliter la création du site web, ainsi que la librairie mongoose permettant de discuter avec la base de donnée MongoDB, le moteur de template nunjucks enfin boostrap qui est une librairie CSS permettant de personnaliser nos pages web. 
+Ensuite écriver dans le terminal : 
 ```
-npm install --save express mongoose nunjuncks bootstrap
+npm install --save express mongoose nunjucks bootstrap
 ``` 
-Ouvrez Visual Studio Code, Fichier -> ouvrir un dossier -> test <br/>
-Puis créer un fichier  s'intitullant :file_folder: app.js.<br/> 
-Dans ce fichier, vous pouvez écrire : 
+Laisser les installations se faire. Une fois terminé, le fichier packages.json sera modifier avec les nouvelles instances. De plus, un nouveau fichier sera créé et nommé *package-lock.json* .
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCPackagejsonedit.PNG)
+<br/>
+Puis créer un fichier  s'intitullant :file_folder: app.js pour cela vous n'avez qu'à cliquer sur le petit icône comme sur la capture suivante: 
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCNewFile.PNG)
+<br/> 
+Dans ce fichier, vous écrivez ls lignes de codes suivantes : 
 ``` javascript
+//importation des librairies
 var express = require('express');
-var mangoose = require('mangoose');
+var mongoose = require('mongoose');
 
-var app = express(); // instancie une application express
+// instancie une application express
+var app = express(); 
 
-app.get('/', req,res => {  
+app.get('/',(req,res) => {  
   res.send('Votre application fonctionne') // réponse envoyé au client
  });
 
-console.log('Test lancer sur le port 3000');
+//écoute de l'application sur le port 3000 de votre machine
+console.log('Test lancé sur le port 3000');
 app.listen(3000);
 ``` 
-L'entrée app.get permet de définir une nouvelle route qui execute la fonction res.send à chaque fois qu'un utilisateur va à la racine de notre application symboliser par "/" <br/>
-Dans le terminal de VSC: 
+Lorsque l'on éxecute le requete GET à la racine de notre application, on renvoir la réponse contenue dans res.send. <br/>
+Dans le terminal de VSC, afin de tester l'application: 
 ```
 node app.js
 ``` 
 Vous pouvez désormais aller sur votre explorateur à l'adresse : localhost:3000 
-La page devrait afficher *Votre application fonctionne* (IMAGE) 	:grinning:
+La page devrait afficher *Votre application fonctionne*	:grinning: ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/WebFonctionne.PNG)
 
 Une fois cette vérification faite, vous pouvez enlever les lignes de app.get. <br/>
 
