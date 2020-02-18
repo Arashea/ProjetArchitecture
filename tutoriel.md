@@ -6,10 +6,12 @@ Vous serez également en mesure d'avoir une interface web à l'aide d'Express.
 # 1er Etape: télécharger les environnements.
 Lors de cette étape, nous allons télécharger les logiciels suivants : 
 * <a href="https://nodejs.org/fr/download/" title="Tuto">Nodejs.org </a>  : télécharger la version qui correspond à votre système d'exploitation
-* <a href="https://expressjs.com/fr/starter/installing.html" title="Tuto">Express js </a>
-* MongoDB
 * <a href="https://code.visualstudio.com/download" title="Tuto">Visual studio code </a> 
-* nunjucks : moteur de template 
+* MongoDB * 
+
+## Comment configurer MongoDB 
+Aller sur <a href="https://www.mongodb.com" title="Tuto">MongoDB </a> 
+
 
 Aller sur <a href="https://nodejs.org/fr/download/" title="Tuto">Nodejs.org </a> et télécharger la version qui correspond à votre système d'exploitation. 
 Nous choisirons ici celle de Windows 64bits. 
