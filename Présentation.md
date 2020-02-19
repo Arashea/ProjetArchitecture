@@ -21,7 +21,7 @@ De plus, en comparaison avec d'autres serveurs web, Node.js est celui qui est ut
   Node.js a été créé en 2009.
   Il s'agit d'un environnement d'éxecution Javascript qui est orienté évènement. Cet environnement utilise le compilateur Javascript V8 de Google. <br/>
   Cet environnement laisse une grande place à HTTP, ce qui en fait une base pour les librairies web ou les frameworks. <br/>
-  Le node.js a un comportement similaire au Javascript dans le sens ou il permet de réaliser des boucles événementielles, sans que l'utilisateur ne s'en rende compte.
+  Le node.js a un comportement similaire au Javascript dans le sens où il permet de réaliser des boucles événementielles, sans que l'utilisateur ne s'en rende compte.
   
   ### Avantages
   
@@ -30,6 +30,7 @@ De plus, en comparaison avec d'autres serveurs web, Node.js est celui qui est ut
 * **Gagner du temps et d'argent pour l'entreprise**: il faut savoir qu'avant l'apparition de node.js, le Javascript n'était utilisé que pour le Front-end et qu'il fallait un autre langage pour la partie Back-end.  Désormais, Les deux côtés peuvent être réalisé en Javascript (côté client et côté serveur). Le développeur Fullstack en Javascript est devenue une réalité.
 * **Boucle évènementielle** : Node.js est basé sur une conception asynchrone, ce qui implique que les processus sont non-bloquants. Les processus peuvent donc être lancés en parallèles et seront traités au fil de l'eau. Ainsi, un très grand nombre de requêtes peuvent être traitées simultanément et efficacement. **Une forte montée en charge peut être supportée.** 
 * **Communauté** : Internet regorge de cours en ligne, de webinaires ou de MOOC pouvant vous aider à en apprendre plus sur Node.js.
+* **Modulaire** : NodeJs est très flexible. On peut commencer un projet de rien puis importer petits à petits des librairies créées par d'autres developpeurs et open source à l'aide de **npm** alias le Node Package Manager. On se retrouve ainsi avec un projet évolutif dans le temps.
 
    ## <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" width="200"> 
   
