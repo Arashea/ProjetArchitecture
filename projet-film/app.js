@@ -8,6 +8,11 @@ require('dotenv/config');
 mongoose.connect(process.env.DB_CONNECTION,() =>{
   console.log('connection à la database');
 });
+var db= mongoose.connection;
+db.on('error',console.error.bind(console,'connection error :'));
+db.once('open', function(){
+  console.log('connecte à la bd');
+});
 
 //récuperer les différents modèles créés
  require('./models/Films');
@@ -17,7 +22,7 @@ mongoose.connect(process.env.DB_CONNECTION,() =>{
 var app = express(); 
 
 //middleware
-app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use('/css', express.static(__dirname +'/node_modules/bootstrap/dist/css'));
 
 //utiliser le router en fonction des adresses demandées dans le navigateur
 app.use('/',require('./routes/films'));

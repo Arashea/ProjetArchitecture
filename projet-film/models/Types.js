@@ -2,6 +2,8 @@ var mongoose =require('mongoose');
 
 var typeSchema = new mongoose.Schema({
     name: String
+},{
+    collection: 'Types'
 });
 
 //virtual champs non stocké dans la base de données mais qui est utilisable

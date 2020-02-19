@@ -1,17 +1,28 @@
 var mongoose = require('mongoose');
 
 var filmSchema = new mongoose.Schema({
-    titre: String,
+    titre: {
+        type: String,
+        required : true
+    },
     affiche: String, // chemin de l'image
-    synopsis: String,
+    synopsis: {
+        type: String,
+        required : true
+    },
     date: String,
-    realisateur:String,
+    realisateur:{
+        type: String,
+        required : true
+    },
     types:[
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Type' // ces objectsId sont des ref du modele type
+            ref: 'Types' // ces objectsId sont des ref du modele type
         }
     ]
+},{
+    collection: 'Films'
 });
 
 var Films = mongoose.model('Films',filmSchema);

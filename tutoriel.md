@@ -122,6 +122,12 @@ require('dotenv/config');
 mongoose.connect(process.env.DB_CONNECTION,() =>{
   console.log('connection à la database');
 });
+var db= mongoose.connection;
+db.on('error',console.error.bind(console,'connection error :'));
+db.once('open', function(){
+  console.log('connecte à la bd');
+});
+
 ```
 
 Dans VSC, créez un nouveau dossier intitulé views. Puis dans ce nouveau dossier, nous allons créer deux nouveaux dossier et un fichier : 
@@ -151,18 +157,22 @@ Une fois, ces lignes ajoutées, ouvrer le fichier layout.html et écrivez ceci :
 	<title>Ma base de films</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="css/boostrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Ma super base de films</h1>
-    {% block content%}{% endblock%}
-    <hr>
-    <div class="text-center">
-        Copyright Architecture 2019
+    <div class="container">
+        <h1>Ma super base de films</h1>
+        {% block content%}{% endblock%}
+        <hr>
+        <div class="text-center">
+            Copyright Architecture 2019
     </div>
+    
+</div>  
 </body>
 </html>
 ``` 
+
 La ligne comportant le *block content* est une ligne spécialisé pour nunjucks. En effet, ce moteur de template sait que c'est à ce moment que commence un block. Cela nous permettra d'utiliser le layout plusieurs fois et de changer uniquement le contenu du block content. Cela permet de ne pas dupliquer toute la partie au dessus.  
 <br/>
 Cependant, nous n'avons pas accès à bootstrap.min.css, pour y avoir accès nous devons aller dans le fichier app.js: 
@@ -181,11 +191,20 @@ Dans le fichier Films.js, vous allez créer le schéma des films. Cela permettra
 var mongoose = require('mongoose');
 
 var filmSchema = new mongoose.Schema({
-    titre: String,
+    titre: {
+        type: String,
+        required : true
+    },
     affiche: String, // chemin de l'image
-    synospsis: String,
+    synopsis: {
+        type: String,
+        required : true
+    },
     date: String,
-    realisateur:String,
+    realisateur:{
+        type: String,
+        required : true
+    },
     types:[
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -198,6 +217,7 @@ var Films = mongoose.model('Films',filmSchema);
 
 module.exports = Films; 
 ```
+Pour rendre certains paramètres obligatoires, on ajoute l'attribut *required* à true. 
 Le champs *type* est un tableau car un film peut avoir plusieurs types (horreur et animation par exemple). Il fera lien avec les types qui seront definis dans le fichier Types.js.
 <br/>
 *module.exports* vous permettra d'exporter le modèle que vous venez de définir, afin de le réutiliser dans d'autres parties de votre applications. 
@@ -259,6 +279,7 @@ app.use('/types', require('./routes/types'));
 Ainsi, une fois nos router déclarés, nous pouvons compléter les fichiers les concernants. Ainsi, dans le fichier films.js, veuillez écrire : 
 ``` javascript
 var Films = require('./../models/Films);
+require('./../models/Types');
 //instancie la page  d'acceuil
 router.get('/', (req,res)=> {
     Films.find({}).populate('types').then(films => {
@@ -266,12 +287,11 @@ router.get('/', (req,res)=> {
     })
 });
 ```
-*.find({})* signifie que nous voulons récuperer tous les films de la base de données. *populate* permet de dire a mongoose de recuperer tous les types associés aux films. *.res.render* permet de faire le rendu de la page films/index.html avec la variable films. 
+Les deux *require* permettent de récu^pérer les différents modèles. *.find({})* signifie que nous voulons récuperer tous les films de la base de données. *populate* permet de dire a mongoose de recuperer tous les types associés aux films. *.res.render* permet de faire le rendu de la page films/index.html avec la variable films. 
 <br/>
 Cette vue n'étant pas encore créée, nous allons le faire. Dans le fichier views -> films, créez un fichier **index.html** .
 Dans ce fichier, vous écrivez : 
 ``` html
-<! -- herite du fichier.html --> 
 {% extends"layout.html"%} 
 
 {% block content %}
@@ -282,8 +302,9 @@ Dans ce fichier, vous écrivez :
             <div class="panel-heading">
                 {{p.titre}}
             </div>
-            <div class="panel-content">
-                {{p.synopsis}}
+            <div class="panel-body">
+               Date: {{p.date}}  <br/>
+               Realisateur:  {{p.realisateur}}
             </div>
         </div>
     {% endfor %}
@@ -291,3 +312,100 @@ Dans ce fichier, vous écrivez :
 {% endblock %}
 ```
 On change alors le contenu du block content inscrit dans la page layout.html . Ce que vous venez d'écrire permettra de réaliser une boucle sur tous les films contenus dans votre base de données et d'en afficher le titre et la synopsis. 
+
+Ouvrer votre navigateur et tapez l'adresse : localhost:3000, votre affichage devrait ressembler à celui-ci: 
+<br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/ResultatCSS.PNG)
+<br/>
+si ce n'est pas le cas, remplacez la ligne comportant le href de bootstrap par celle la : <br/>
+```html
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+``` 
+<br/>
+On cherche ensuite à créer une vue pour afficher qu'un seul film et non toute la liste des films. Pour cela,dans views -> films, ajouter un fichier **show.html** et écrivez les lignes suivantes :.
+<br/> 
+
+``` html
+{% extends "layout.html" %} 
+
+{% block content %}
+   <div class="row">
+       <div class="col-sm-3">
+       </div>
+       <div class="col-sm-9">
+           <h2>{{films.titre}}</h2>
+           <p class="lead">
+              Realisateur:  {{p.realisateur}} <br/>
+              Synopsis :  {{p.synopsis}} <br/>
+               Date: {{p.date}}  
+                      
+           </p>
+           <h3>Types : </h3>
+           {% for t in films.types %}
+           <span class="label label-default">
+             {{t.name}}  
+           </span>
+           {% endfor %}
+       </div>
+   </div>
+
+{% endblock %}
+```  
+<br/>
+On récupère l'intégralité des paramètre du films et on réalise donc une boucle qui nous permettra de récupérer tout les types d'un film. <br/>
+Ensuite, il faut créer la route permettant d'y accéder. <br/>
+Dans le fichier films.js, écrivez : 
+
+``` javascript
+//:id signifie que c'est un parametre de route
+router.get('/:id',(req,res) => {
+    Films.findById(req.params.id).populate('types').then(films => {
+        res.render('films/show.html',{films: films});
+    }, // si la fonction n'est pas éxécuté, on renvoie l'erreur brute
+    err => res.status(500).send(err));
+});
+```
+Comme précédemment, on récupère tous les attributs du films pour pouvoir les afficher. <br/>
+Afin de pouvoir afficher cette page, nous allons y faire référence dans le fichier **index.html**. Remplacez le contenu du pannel-heading par : <br/>
+```html
+ <a href="{{p._id}}">{{p.titre}}</a>
+ ```
+Maintenant que nousavons créé ces différentes vues, nous allons voir si l'affichage fonctionne. Pour cela, retourner sur MongoDB et cliquer sur **collections**. 
+ <br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/MongoDBCollection.PNG)
+<br/>
+Une fois que vous êtes dans collections, cliquez sur **Create Database** et remplissez le premier champs par *test* et le second champs du même nom que votre model ici *Films* : <br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/MongoDBcreation.PNG)
+
+Une fois les champs remplis, cliquer sur **Create**. Une fois cette opération réalisé, il faut ajouter une autre collection que l'on nommera *Types* en appuyant sur le petit ⊕ à côté de test comme indiqué ci-dessous et remplissez le champs, puis appuyer sur **Create**. <br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/MongoDBCollection2.PNG)
+<br/>
+Tout d'abord, nous allons remplir la collection Types, pour cela, cliquez sur le bouton **insert documents** et remplir la pop-up comme ci dessous: <br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/insertToCol.PNG)
+<br/>
+Puis cliquez sur le bouton **insert**. Vous venez donc de créer une entrée dans votre collection. 
+Maintenant, nous allons remplir la collection Films, utiliser le même processus pour créer une nouvelle entrée et écrivez : 
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/insertTofilm.PNG)
+<br/>
+Faites attention a changer le format de types en *Array* et l'entrée de tableau en *ObjectId* et mettre la valeur de cet ObjectId par la valeur id du type créé précedemment. 
+Vous pouvez ainsi créer d'autres entrée pour chaque collections.
+<br/>
+Relancer votre application à l'aide de la commande dans le terminal:
+``` 
+node app.js
+```
+En interrogeant localhost:3000: vous devriez voir votre film s'afficher :
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/AffichageHome.PNG)
+En cliquant sur le lien *Titanic*, vous devriez voir toutes ses informations ainsi que son type:
+<br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/Titanic.PNG)
+ <br/>
+Dans le fichier layout.html, nous allons rajouter une base autour du champs "h1" afin de pouvoir revenir en tout temps à la page principale :
+<br/>
+``` html
+    <a href='/'>
+        <h1>Ma super base de films</h1>
+    </a>
+```
+
+## Création d'un formulaire 

@@ -2,15 +2,23 @@
 <html lang="fr">
 <head>
 	<title>Ma base de films</title>
-	<meta charset="utf-8">
-	<link href="css/boostrap.min.css"rel="stylesheet" type="text/css" >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
+
 <body>
-    <h1>Ma super base de films</h1>
-    {% block content%}{% endblock%}
-    <hr>
-    <div class="text-center">
-        Copyright Architecture 2019
+    <div class="container">
+        <a href='/'>
+        <h1>Ma super base de films</h1>
+        </a>
+        {% block content%}{% endblock%}
+        <hr>
+        <div class="text-center">
+            Copyright Architecture 2019
     </div>
+    
+</div>  
 </body>
 </html>
