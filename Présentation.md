@@ -6,10 +6,10 @@ N'ayant jamais étudié cet environnement, nous avons réalisé quelques recherc
 # Mise en contexte 
 
 Le Javascript a été créé en 1995 par Netscape afin de pouvoir manipuler les pages web en Frontend. <br/>
-Depuis, ce langage est devenu de plus en plus populaire. C'est ainsi que Node.js est apparu afin de gérer le code côté serveur.
+Depuis, ce langage est devenu de plus en plus populaire car tous les navigateurs ont un moteur Javascript qui permet de traduire le code Javascript en langage machine. Mais du côté serveur, les langages utilisés étaient le Php, le Java ou encore le Python. C'est ainsi que Node.js est apparu afin de permettre l'utilisation du Javascript à la fois du côté client et du côté serveur ce qui permet d'utiliser un seul et unique langage pour le Frontend et le Backend.
 
 <img src="https://w3techs.com/diagram/history_technology/ws-nodejs"> 
-La figure ci-dessus vous montre l'utilisation du Node.js dans les sites web. Nous pouvons voir que son utilisation est en constante augmentation depuis un an. 
+La figure ci-dessus vous montre l'évolution de l'utilisation du Node.js dans les sites web de Janvier 2019 à Février 2020. Nous pouvons voir que son utilisation est en constante augmentation depuis un an jusqu'à avoir dépassé la barre des 80% d'utilisation. 
 <br/>
 De plus, en comparaison avec d'autres serveurs web, Node.js est celui qui est utilisé par les sites de haut traffic. 
 <img src="https://w3techs.com/diagram/market_technology/ws-nodejs"> 
