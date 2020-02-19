@@ -165,7 +165,7 @@ Une fois, ces lignes ajoutées, ouvrer le fichier layout.html et écrivez ceci :
         {% block content%}{% endblock%}
         <hr>
         <div class="text-center">
-            Copyright Architecture 2019
+            Copyright Architecture 2020
     </div>
     
 </div>  
@@ -409,3 +409,34 @@ Dans le fichier layout.html, nous allons rajouter une base autour du champs "h1"
 ```
 
 ## Création d'un formulaire 
+
+Afin de créer un formulaire pour la modification ou l'ajout de film, nous allons créer une nouvelle vue dans le fichier views -> Films, et nous l'appellerons **edit.html**
+<br/>
+Dans ce fichier, vous allez ecrire : <br/>
+``` html
+{% extends "layout.html" %}
+
+{% block content %}
+    <form action="POST"> 
+        <div class="form group">
+            <label for="titre"> Titre du film </label>
+            <input type="text" id="titre" name="titre"  class="from-control">
+        </div>
+        <div class="form group">
+            <label for="date"> Date </label>
+            <input type="text" id="date" name="date"  class="from-control">
+        </div>
+        <div class="form group">
+            <label for="synopsis"> Synopsis </label>
+            <textarea id="synopsis" name="synopsis"  class="from-control"></textarea>
+        </div>
+        <div class="form group">
+            <label for="file"> Affiche </label>
+            <input type="file" id="file" name="file">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Enregistrer" />
+    </form>
+{% endblock %}
+```
+Encore une fois, notre affichage hérite du fichier layout.html. La balise *form* permet de dire que nous allons décrire un formulaire. 
+
