@@ -600,7 +600,7 @@ Il ne vous reste plus qu'à ajouter la ligne indiquant que vous allez afficher l
 
 ```
 Dans show.html, nous allons rajouter un bouton permettant d'editer un film, avant la balise *p* rajouter la ligne suivante : <br/>
-```html
+``` html
 <a href="/edit/{{films._id}}" class="btn btn-default">Editer</a>
 ```
 De la même manière sur la page d'accueil, on ajoute un boutou permettant d'ajouter un nouveau film. Ainsi dans le fichier **index.html** ajoutez après la balise h2 : 
@@ -639,6 +639,8 @@ var Types =require('./../models/Types');
 
 router.get('/:types',(req,res)=>{
     Types.findOne({name: req.params.types}).populate('Films').then(types =>{
+           if(!types) return res.status(404).send('Types introuvables');
+
             res.render('types/show.html',{
                 types: types,
                 films: types.Films,
@@ -648,4 +650,42 @@ router.get('/:types',(req,res)=>{
 
 module.exports = router;
 ```
+Cette route permet de trouver le type passé en paramètres et de rechercher tous les films qui lui sont associés. Comme MongoDB est sensible à la casse, on ajoute la condition *if* permettant d'indiquer à l'utilisateur que le type qu'il recherche n'est pas valide. 
+<br/>
+Afin de faire référence à la page regroupant les types, dans le fichier view ->films-> show.html, nous allons remplacer la balise span par la balise a et nous allons faire référence à la page comportant les types. <br/>
+``` html
+ <a href='/types/{{t.name}}' class="label label-default">{{t.name}}</a>
+```
 
+Maintenant, il ne nous reste plus qu'à créer une route pour supprimer un film. 
+Dans le fichier films.js, en prenant soin de toujours écrire cette route avant la route *:id*:
+
+``` javascript
+router.get('/delete/:id',(req,res)=>{
+    Films.findOneAndRemove({_id: req.params.id}).then(()=>{
+        res.redirect('/');
+    });
+});
+```
+*findOneAndRemove* permet de récupérer un film selon son id et de le retirer de la base de données. La ligne *res.redirect* permet de rediriger l'utilisateur sur la page d'accueil.
+
+Dans le fichier views->films-> show.html, ajouter en dessous de la ligne du bouton editer : 
+``` html
+<a href="/delete/{{films._id}}" class="btn btn-danger">Supprimer</a>
+<hr>
+```
+Cela permet de créer un bouton Supprimer dans la page d'affichage d'un film.
+Voici, les pages que vous devriez obtenir apres avoir relancer votre application :
+
+Liste des films par types:<br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/Types.PNG)
+<br/>
+
+
+affichage d'un film avec bouton de modification ou de suppression. <br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/TitanicAffichage.PNG)
+<br/>
+
+## Vous pouvez être fier de vous !
+
+Vous enez de terminer ce tuto. Vous avez donc un site fonctionnel qui vous permez d'afficher des films en listes ou par types. Vous avez également la possibilité de créer, éditer ou supprimer des films de votre base de donnée. 

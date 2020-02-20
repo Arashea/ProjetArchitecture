@@ -8,6 +8,8 @@
        <div class="col-sm-9">
            <h2>{{films.titre}}</h2>
            <a href="/edit/{{films._id}}" class="btn btn-default">Editer</a>
+           <a href="/delete/{{films._id}}" class="btn btn-danger">Supprimer</a>
+           <hr>
            <p class="lead">
              Realisateur : {{films.realisateur}} <br/>
             Synopsis : {{films.synopsis}} <br/>
@@ -15,7 +17,7 @@
            </p>
            <h3>Types : </h3>
            {% for t in films.types %}
-           <span class="label label-default">{{t.name}}</span>
+           <a href='/types/{{t.name}}' class="label label-default">{{t.name}}</a>
            {% endfor %}
        </div>
    </div>

@@ -25,6 +25,12 @@ router.get('/edit/:id',(req,res)=> {
     });
 });
 
+router.get('/delete/:id',(req,res)=>{
+    Films.findOneAndRemove({_id: req.params.id}).then(()=>{
+        res.redirect('/');
+    });
+});
+
 //:id signifie que c'est un parametres de routes
 router.get('/:id',(req,res) => {
     Films.findById(req.params.id).populate('types').then(films => {
@@ -32,6 +38,7 @@ router.get('/:id',(req,res) => {
     }, // si la fonction n'est pas éxécuté, on renvoie l'erreur brute
     err => res.status(500).send(err));
 });
+
 
 router.post('/:id?', (req,res)=> {
     new Promise((resolve, reject)=>{
