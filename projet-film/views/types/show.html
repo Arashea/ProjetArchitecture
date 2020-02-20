@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Les films de type <span>{{types.name}}</span></h2>
+<hr>
+
+{% for p in films %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a href="/{{p._id}}">{{p.titre}}</a>
+        </div>
+        <div class="panel-body">
+            Date: {{p.date}}  <br/>
+            Realisateur:  {{p.realisateur}}
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

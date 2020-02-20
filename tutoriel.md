@@ -279,7 +279,7 @@ app.use('/types', require('./routes/types'));
 Ainsi, une fois nos router déclarés, nous pouvons compléter les fichiers les concernants. Ainsi, dans le fichier films.js, veuillez écrire : 
 ``` javascript
 var Films = require('./../models/Films);
-require('./../models/Types');
+var Types = require('./../models/Types');
 //instancie la page  d'acceuil
 router.get('/', (req,res)=> {
     Films.find({}).populate('types').then(films => {
@@ -417,26 +417,235 @@ Dans ce fichier, vous allez ecrire : <br/>
 {% extends "layout.html" %}
 
 {% block content %}
-    <form action="POST"> 
-        <div class="form group">
-            <label for="titre"> Titre du film </label>
-            <input type="text" id="titre" name="titre"  class="from-control">
-        </div>
-        <div class="form group">
-            <label for="date"> Date </label>
-            <input type="text" id="date" name="date"  class="from-control">
-        </div>
-        <div class="form group">
-            <label for="synopsis"> Synopsis </label>
-            <textarea id="synopsis" name="synopsis"  class="from-control"></textarea>
-        </div>
-        <div class="form group">
-            <label for="file"> Affiche </label>
-            <input type="file" id="file" name="file">
-        </div>
+<form method="POST">
+    <div class="form-group">
+        <label for="titre">titre du film</label>
+        <input type="text" id="titre" name="titre" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="realisateur">Réalisateur du film </label>
+        <input type="text" id="realisateur" name="realisateur" class="form-control" >
+    </div>
+    <div class="form-group">
+        <label for="synopsis">Synopsis du film </label>
+        <textarea name="synopsis" id="synopsis" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="date">date de diffusion du film </label>
+        <input type="text" id="date" name="date" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="file">affiche du film </label>
+        <input type="file" id="file" name="file">
+    </div>
         <input type="submit" class="btn btn-primary" value="Enregistrer" />
     </form>
 {% endblock %}
 ```
-Encore une fois, notre affichage hérite du fichier layout.html. La balise *form* permet de dire que nous allons décrire un formulaire. 
+Encore une fois, notre affichage hérite du fichier layout.html. La balise *form* permet de dire que nous allons décrire un formulaire. La balise *input type="text"* permet de créer des champs que vous allez pouvoir remplir. La balise *input type="submit" permet de créer un bouton et l'attribut *value* permet de renseigner ce qui sera écrit sur le bouton. 
+<br/>
+Une fois cette vue crée, nous allons créé les routes ainsi que la méthode "POST" permettant d'envoyer les informations à la base de données. 
+Afin de créer les routes pour créer et modifier un film, nous allons modifié le fichier **films.js** 
+Dans ce fichier, vous allez écrire les lignes suivantes en prennat attention à l'ordre des routes. Cela signifie que les deux routes suivantes doivent être indiquer avant la route *router.get('/:id',(req,res)*
+ <br/>
+``` javascript
+//route pour ajouter un nouveau films
+router.get('/new',(req,res)=> {
+    var films = new Films();
+    res.render('films/edit.html', { films: films});
+});
+//route pour modifier un film 
+router.get('/edit/:id',(req,res)=> {
+    Films.findById(req.params.id).populate('types').then(films =>{
+        res.render('films/edit.html',{films: films});
+    }); 
+});
+
+``` 
+Ensuite dans le fichier edit.html, nous allons ajouter des paramètres afin de pouvoir afficher les attributs au cas où nous voudrions modifier un film. Votre fichier devrait ressembler à celui-ci : 
+``` html
+{% extends "layout.html" %}
+
+{% block content %}
+<form method="POST" >
+    <div class="form-group">
+        <label for="titre">titre du film</label>
+        <input type="text" id="titre" name="titre" class="form-control" value="{{films.titre}}">
+    </div>
+    <div class="form-group">
+        <label for="realisateur">Réalisateur du film </label>
+        <input type="text" id="realisateur" name="realisateur" class="form-control" value="{{films.realisateur}}">
+    </div>
+    <div class="form-group">
+        <label for="synopsis">Synopsis du film </label>
+        <textarea name="synopsis" id="synopsis" class="form-control">{{films.synopsis}}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="date">date de diffusion du film </label>
+        <input type="text" id="date" name="date" class="form-control" value="{{films.date}}">
+    </div>
+    <div class="form-group">
+        <label for="file">affiche du film </label>
+        <input type="file" id="file" name="file">
+    </div>
+        <input type="submit" class="btn btn-primary" value="Enregistrer" />
+    </form>
+{% endblock %}
+``` 
+Vous pouvez remarquer que notre formulaire ne prend pas encore en compte les différents types de films. Pour ce faire nous allons ajouter dans le formulaire avant la balise *input du bouton* une boucle  : <br/>
+
+```html
+   <div class="form-groupe">
+        {% for types in types %}
+            <label>
+                 <input type="checkbox" name="types[]" value="{{types._id}}" {% if films.types.indexOf(types._id) != -1 %} checked {% endif %}>
+                {{types.name}}
+            </label>
+         {% endfor %}
+    </div>
+``` 
+Le type *checkbox* permet de créer des cases à cocher en fonction des types possibles. la boucle *if* permet lors d'une modification de pré-cocher les types du films. <br/>
+Cela entraine des modifications sur le fichier **films.js**, en effet, il faut indiquer aux différentes routes qu'il faut récupérer les types de films. Les routes créés juste au dessus devraient être comme cela : <br/>
+``` javascript
+//route pour ajouter un nouveau films
+router.get('/new',(req,res)=> {
+    Types.find({}).then(types =>{
+     var films = new Films();
+    res.render('films/edit.html', { films: films, types: types, endpoint: '/' });   
+    });
+});
+//route pour modifier un film 
+router.get('/edit/:id',(req,res)=> {
+    Types.find({}).then(types => {
+        Films.findById(req.params.id)then(films =>{
+            res.render('films/edit.html',{films: films, types: types, endpoint: '/' + films._id.toString() });
+        });   
+    });
+});
+```
+Le paramètre **endpoint** correspond à l'URL du formulaire à appeler. 
+Maintenant, relancer votre application à l'adresse : localhost:3000/new . Vous devez obtenir cette affichage: <br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/Formulaire.PNG)
+<br/>
+et en allant à l'adresse: localhost/edit/*id d'un film* par exemple d'id du film Titanic, vous obtiendrez ceci : <br/>
+![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/Titanic2.PNG)
+<br/>
+Comme vous pouvez le constater, la case du type *horreur* est déjà coché.
+<br/>
+Nous devons maintenant gérer la gestion de l'image. Pour cela,  dans le fichier **app.js** : <br/>
+
+```javascript
+var multer =require('multer');
+
+//configuration pour l'upload
+var upload = multer({
+  dest: __dirname + '/uploads'
+});
+
+//utilisation de upload dans le formulaire quand un champs s'appelle file tu sauvergarde dans le répertoire uplod
+app.use(upload.single('file'));
+
+app.use('/uploads', express.static(__dirname + '/uploads'));
+
+```
+
+Nous avons besoin de multer pour gérer les images. La ligne contenenant *upload.single('file')* permet d'indiquer que un champs s'appelle file dans le formulaire, on doit le sauvegarder dans le fichier uploads.
+<br/>
+Afin de télécharger multer, réaliser cette commande dans le terminal de VSC : <br/>
+```
+npm install multer --save
+```
+Maintenant, nous devons implémenter la route POST qui nous permettra de récupérer les informations pour les enregistrer dans la base de données. Dans le fichier **films.js** :<br/>
+``` javascript 
+router.post('/:id?', (req,res)=> {
+    new Promise((resolve, reject)=>{
+        //si le film est deja dans la base, on le récupère
+        if(req.params.id){
+            Films.findById(req.params.id).then(resolve,reject);
+        }
+        else{ // sinon on en crée un nouveau
+            resolve(new Films())
+        }
+        //récupération des données du formulaire
+    }).then(films=> {
+        films.titre = req.body.titre;
+        films.realisateur = req.body.realisateur;
+        films.date = req.body.date;
+        films.synopsis = req.body.synopsis;
+        films.types = req.body.types;
+
+        if(req.file) films.affiche = req.file.filename;
+
+        return films.save();
+    }).then(()=> {
+        //redirection vers la page d'acceuil
+            res.redirect('/')
+    });
+});
+```
+
+Promise est une fonction asynchrone qui peut être exécuter à n'importe quel moment.  *req.body* permet de récupérer les données du formulaire. 
+
+
+Dans le formulaire, remplacer la première balise de form par ceci : 
+```html
+<form method="POST" action="{{endpoint}}" enctype="multipart/form-data">
+``` 
+Cela permet de dire au navigateur comment il doit encoder les données de notre formulaire. Ainsi, on peut récupérer notre affiche de film dans le formulaire.
+<br/>
+Il ne vous reste plus qu'à ajouter la ligne indiquant que vous allez afficher l'aaffiche du film, pour cela dans show.html ajouté dans la balise **div class="col-sm-3"**: 
+<br/>
+```html
+ <img src="/uploads/{{films.affiche}}" alt="{{films.titre}}" width: 100%>
+
+```
+Dans show.html, nous allons rajouter un bouton permettant d'editer un film, avant la balise *p* rajouter la ligne suivante : <br/>
+```html
+<a href="/edit/{{films._id}}" class="btn btn-default">Editer</a>
+```
+De la même manière sur la page d'accueil, on ajoute un boutou permettant d'ajouter un nouveau film. Ainsi dans le fichier **index.html** ajoutez après la balise h2 : 
+``` html
+ <a href="/new" class="btn btn-primary">Ajouter un film</a>
+ <hr>
+``` 
+Ensuite, on cherche à réaliser une page sur laquelle les films peuvent être référencé selon leur types, pour cela, dans le dossier views-> types, créez un fichier show.html dans lequel vous écrirez : 
+```html
+{% extends layout.html %}
+
+{% block content %}
+<h2>Les films de type <span>{{types.name}}</span></h2>
+<hr>
+{% for p in films %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+       <a href="{{p._id}}">{{p.titre}}</a>
+    </div>
+    <div class="panel-body">
+       Date: {{p.date}}  <br/>
+       Realisateur:  {{p.realisateur}}
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
+```
+
+ Definissez la route dans le fichier **types.js** ajoutez : <br/>
+``` javascript
+var router = require('express').Router();
+
+var Films=require('./../models/Films')
+var Types =require('./../models/Types');
+
+router.get('/:types',(req,res)=>{
+    Types.findOne({name: req.params.types}).populate('Films').then(types =>{
+            res.render('types/show.html',{
+                types: types,
+                films: types.Films,
+            })
+    });
+});
+
+module.exports = router;
+```
 

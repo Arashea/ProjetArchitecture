@@ -3,10 +3,11 @@
 {% block content %}
    <div class="row">
        <div class="col-sm-3">
-
+            <img src="/uploads/{{films.affiche}}" alt="{{films.titre}}" width: 100%>
        </div>
        <div class="col-sm-9">
            <h2>{{films.titre}}</h2>
+           <a href="/edit/{{films._id}}" class="btn btn-default">Editer</a>
            <p class="lead">
              Realisateur : {{films.realisateur}} <br/>
             Synopsis : {{films.synopsis}} <br/>
