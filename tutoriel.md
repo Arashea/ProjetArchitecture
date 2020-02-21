@@ -58,7 +58,7 @@ npm install --save express mongoose nunjucks bootstrap
 Les installations devraient prendre quelques secondes à se faire. Une fois terminée, le fichier packages.json sera modifié avec les nouvelles instances. De plus, un nouveau fichier sera créé et nommé *package-lock.json* .
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCPackagejsonedit.PNG)
 <br/>
-Puis créez un fichier  s'intitullant :file_folder: app.js pour cela vous n'avez qu'à cliquer sur la petite icône comme sur la capture suivante: 
+Puis créez un fichier  s'intitullant :file_folder: app.js pour cela vous n'avez qu'à cliquer sur la petite icône comme sur la capture suivante: <br/>
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCNewFile.PNG)
 <br/> 
 Dans ce fichier, vous écrivez les lignes de codes suivantes : 
