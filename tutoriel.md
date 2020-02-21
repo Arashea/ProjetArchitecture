@@ -2,6 +2,9 @@
 Dans ce tutoriel, nous vous présenterons comment créer un site web permettant de repésenter une base de données de films. Nous allons baser notre tutoriel sur un environnement sous Windows 10. Nous allons utiliser le terminal de Visual Studio Code mais il est possible d'utiliser directement le terminal PowerShell de windows.  <br/> 
 A la fin de ce tutoriel, vous serez en mesure de recréer un site web qui utilise une base de données en utilisant Node.js, le framework Express ainsi que la base de données MongoDB. 
 
+# Préambule :
+Au cours de ce tutoriel, nous utiliserons l'abbréviation VSC pour parler de Visual Studio Code.<br/>
+Il est possible que vous ayez des problèmes de connexion avec la base de données MongoDB. Si cela est le cas, vérifiez que votre Firewall ne bloque pas la connexion. Dans notre cas, il nous était impossible de nous connecter lorsquz l'on se trouvait sur la connexion de l'UQAC.<br/>
 
 # Etape 1 : télécharger les environnements.
 Lors de cette étape, nous allons télécharger les logiciels suivants : 
@@ -29,7 +32,7 @@ Une fois la sélection faite, vous pouvez cliquer sur **Create cluster**. Une fo
 
 Une fois toute les installations requises effectuées, vous pouvez créer un dossier intitulé **projetFilm** dans le répertoire de votre choix. 
 <br/>
-Ouvrez le dossier que vous venez de créer dans Visual Studio Code: <br/>
+Ouvrez le dossier que vous venez de créer dans Visual Studio Code : <br/>
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCFolder.PNG)
 Une fenêtre apparaitra et vous pourrez ainsi ouvrir votre dossier.<br/>
 Dans VSC, vous allez ouvrir le terminal: <br/>
@@ -41,24 +44,24 @@ Taper la commande suivante qui vous permettra d'initialiser le projet à l'aide 
 ```
 npm init 
 ``` 
-**Attention** : il se peut que le terminal de Visual Studio Code ne soit pas assimiler au terminal de node, redémarrer VSC si cela ne fonctionne pas, redémarrer l'ordinateur. <br/>
-Nous allons ensuite configurer le projet, nous allons garder toute les valeurs par défaut ( appuyer sur entrée jusqu'à valider la création du projet)
+**Attention** : il se peut que le terminal de Visual Studio Code ne soit pas assimiler au terminal de node, redémarrez alors VSC. Si cela ne fonctionne toujours pas, redémarrer l'ordinateur afin qu'il complète correctement l'installation de Nodejs. <br/>
+Nous allons ensuite configurer le projet. Nous allons garder toute les valeurs par défaut ( appuyez sur entrée jusqu'à valider la création du projet)
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCConfig.PNG)
-Un fichier nommé *package.json* sera crée dans votre dossier.  Il comportera les valeurs pas défaut de notre projet.
+Un fichier nommé *package.json* sera créé dans votre dossier.  Il comportera les valeurs pas défaut de notre projet.
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCPackagejson.PNG)
 <br/>
-Dans le cadre de notre projet, nous aurons besoin d'installer le framework Express pour faciliter la création du site web, ainsi que la librairie mongoose permettant de discuter avec la base de donnée MongoDB, le moteur de template nunjucks enfin boostrap qui est une librairie CSS permettant de personnaliser nos pages web. 
-Ensuite écriver dans le terminal : 
+Dans le cadre de notre projet, nous aurons besoin d'installer le framework Express pour faciliter la création du site web, la librairie mongoose permettant de discuter avec la base de donnée MongoDB, le moteur de template nunjucks et enfin boostrap qui est une librairie CSS permettant de personnaliser nos pages web. 
+Afin de tous les installer en même temps, saisissez la ligne de commande suivante dans le terminal : 
 ```
 npm install --save express mongoose nunjucks bootstrap
 ``` 
-Laisser les installations se faire. Une fois terminé, le fichier packages.json sera modifier avec les nouvelles instances. De plus, un nouveau fichier sera créé et nommé *package-lock.json* .
+Les installations devraient prendre quelques secondes à se faire. Une fois terminée, le fichier packages.json sera modifié avec les nouvelles instances. De plus, un nouveau fichier sera créé et nommé *package-lock.json* .
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCPackagejsonedit.PNG)
 <br/>
-Puis créer un fichier  s'intitullant :file_folder: app.js pour cela vous n'avez qu'à cliquer sur le petit icône comme sur la capture suivante: 
+Puis créez un fichier  s'intitullant :file_folder: app.js pour cela vous n'avez qu'à cliquer sur la petite icône comme sur la capture suivante: 
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCNewFile.PNG)
 <br/> 
-Dans ce fichier, vous écrivez ls lignes de codes suivantes : 
+Dans ce fichier, vous écrivez les lignes de codes suivantes : 
 ``` javascript
 //importation des librairies
 var express = require('express');
@@ -75,21 +78,22 @@ app.get('/',(req,res) => {
 console.log('Test lancé sur le port 3000');
 app.listen(3000);
 ``` 
-Lorsque l'on éxecute le requete GET à la racine de notre application, on renvoir la réponse contenue dans res.send. <br/>
-Dans le terminal de VSC, afin de tester l'application: 
+Lorsque l'on éxecute la requete GET à la racine de notre application, on renvoie la réponse contenue dans res.send. <br/>
+Pour lancer votre application, il vous suffit de saisir les lignes de commande suivantes dans votre terminal : 
 ```
 node app.js
 ``` 
-Vous pouvez désormais aller sur votre explorateur à l'adresse : localhost:3000 
+**Attention** si vous souhaitez arreter votre application, il faut appuyer sur les touches CTRL+C afin d'arreter l'application.
+Vous pouvez désormais aller sur votre navigateur internet à l'adresse : localhost:3000 .
 La page devrait afficher *Votre application fonctionne*	:grinning: ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/WebFonctionne.PNG)
 
 Une fois cette vérification faite, vous pouvez enlever les lignes de app.get. <br/>
 
-Ensuite, nous allons nous connecter à la base de donnée mongoDB.Pour ce faire, nous allons utilisé la base de données que nous avons créée sur le cloud. Retourner sur la page de mongoDB, normalement vous y trouverez le cluster que vous avez créé précedemment. 
+Ensuite, nous allons nous connecter à la base de donnée mongoDB.Pour ce faire, nous allons utilisé la base de données que nous avons créée sur le cloud. Retournez sur la page de mongoDB. Normalement vous y trouverez le cluster que vous avez créé précedemment. 
 Cliquez sur Connect puis remplissez les champs demandés.<br/>
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/MongoDBConnect.PNG)
 <br/>
- Concernant l'adresse IP,choisissez votre IP actuelle pour plus de simplicité. (N'oubliez pas de cliquer sur *Add IP* )Puis créez le login et mot de passse de votre utilisateur Admin.(ces données vous permettront de vous connecter à la base de données)
+ Concernant l'adresse IP,choisissez votre IP actuelle pour plus de simplicité. (N'oubliez pas de cliquer sur *Add IP* )Puis créez le login et mot de passe de votre utilisateur Admin.(ces données vous permettront de vous connecter à la base de données)
 <br/>
 Cliquez ensuite sur *Choose a connection method* afin de choisir la méthode de connexion: 
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/MongoDBMethod.PNG)
@@ -97,7 +101,7 @@ Cliquez ensuite sur *Choose a connection method* afin de choisir la méthode de 
 Ensuite cliquez sur *Connect your application* <br/>
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/ConnectApp.PNG)
 <br/>
-Cette page devrait apparaitre, vérifiez bien que votre driver est bien Node.js puis copier la ligne du dessous en cliquant sur *copy*. Ce champs vous permettra de vous connecter à la base de donnée en remplaçant le champs **password** par votre mot de passe. <br/>
+Cette page devrait apparaitre. Vérifiez bien que votre driver est bien Node.js puis copiez la ligne du dessous en cliquant sur *copy*. Ce champs vous permettra de vous connecter à la base de données en remplaçant le champs **<password>** par votre mot de passe. <br/>
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/MongoDBCopy.PNG)
 <br/>
 Retournez sur votre fichier app.js et insérez les lignes suivantes à la suite des imports de librairies :
