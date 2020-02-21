@@ -1,6 +1,6 @@
 # Objectifs du tutoriel 
-Dans ce tutoriel, nous vous présenterons comment créer un site web permettant de rpésenter une base de données de films. Nous allons basé notre tutoriel sur un environnement sous Windows 10. Vous devrez utiliser le terminal de Visual Studio Code.  <br/> 
-A la fin de ce tutoriel, vous serez en mesure de recréer un site web en utilisant Node.js, le framework Express, ainsi que MongoDB. 
+Dans ce tutoriel, nous vous présenterons comment créer un site web permettant de repésenter une base de données de films. Nous allons baser notre tutoriel sur un environnement sous Windows 10. Nous allons utiliser le terminal de Visual Studio Code mais il est possible d'utiliser directement le terminal PowerShell de windows.  <br/> 
+A la fin de ce tutoriel, vous serez en mesure de recréer un site web qui utilise une base de données en utilisant Node.js, le framework Express ainsi que la base de données MongoDB. 
 
 
 # Etape 1 : télécharger les environnements.
@@ -13,29 +13,29 @@ Lors de cette étape, nous allons télécharger les logiciels suivants :
 ## Comment configurer MongoDB 
 Aller sur <a href="https://www.mongodb.com" title="Tuto">MongoDB </a> ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/MongoDB.PNG)
 
-Cliquer sur l'icone en haut à droite de la page nommé : **Try Free** et rentrer les informations nécessaires à la création de votre compte:
+Cliquez sur l'icone en haut à droite de la page nommé : **Try Free** et rentrez les informations nécessaires à la création de votre compte:
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/Inscription.PNG)
 
-Une fois votre compte créé, MongoDB vous prpose 3 formules, dans notre cas la formule gratuite sera suffissante: 
+Une fois votre compte créé, MongoDB vous propose 3 formules. Dans notre cas la formule gratuite sera suffissante: 
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/next.PNG)
-Ainsi, nous avons accès à une base de données sur le cloud. <br/> 
+Ainsi, nous avons accès à une base de données qui se trouve sur le cloud. <br/> 
 MongoDB vous porpose alors de séléctionner les propriétés de votre espace comme sur la photo suivante.  Dans notre cas, nous avons choisi d'utiliser le serveur AWS d'Amazon, de choisir le serveur situé en Virginie (plus proche de notre localisation) et de renommer le Cluster par ProjetNode. 
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/parametres.PNG)
-Une fois la sélection faite, vous pouvez cliquer sur **Create cluster**. Une fois cela fait, votre espace prendra quelques minutes pour être complètement fonctionnel. Nous utiliserons ce temps de mise en place pour commencer le projet. 
+Une fois la sélection faite, vous pouvez cliquer sur **Create cluster**. Une fois cela fait, votre espace prendra quelques minutes pour être complètement fonctionnel. Nous utiliserons ce temps de mise en place pour commencer le projet. <br/>
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/miseenplace.PNG)
 <br/> 
 
 ## Création de notre projet 
 
-Une fois toute les installations requises effectuées, vous pouvez créer un dossier intitulé projetFilm dans le répertoire de votre choix. 
+Une fois toute les installations requises effectuées, vous pouvez créer un dossier intitulé **projetFilm** dans le répertoire de votre choix. 
 <br/>
-Ouvrer le dossier dans Visual Studio Code: 
+Ouvrez le dossier que vous venez de créer dans Visual Studio Code: <br/>
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCFolder.PNG)
-Une fenêtre apparaitra et vous pourrez ainsi ouvrir le dossier que vous avez créé précedement.<br/>
-Dans VSC, vous aller ouvrir le terminal: 
+Une fenêtre apparaitra et vous pourrez ainsi ouvrir votre dossier.<br/>
+Dans VSC, vous allez ouvrir le terminal: <br/>
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCTerminal.PNG)
 
-Vous serez donc situés dans le dossier créé:
+Vous serez donc situés dans le dossier créé: <br/>
 ![](https://github.com/Arashea/ProjetArchitecture/blob/master/image/VSCTerminalview.PNG)
 Taper la commande suivante qui vous permettra d'initialiser le projet à l'aide de npm (node package manager):
 ```
