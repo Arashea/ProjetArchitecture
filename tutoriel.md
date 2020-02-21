@@ -6,7 +6,7 @@ A la fin de ce tutoriel, vous serez en mesure de recréer un site web qui utilis
 Au cours de ce tutoriel, nous utiliserons l'abbréviation VSC pour parler de Visual Studio Code.<br/>
 Il est possible que vous ayez des problèmes de connexion avec la base de données MongoDB. Si cela est le cas, vérifiez que votre Firewall ne bloque pas la connexion. Dans notre cas, il nous était impossible de nous connecter lorsque l'on se trouvait sur la connexion de l'UQAC.<br/>
 
-# Etape 1 : télécharger les environnements.
+# Téléchargement des environnements.
 Lors de cette étape, nous allons télécharger les logiciels suivants : 
 * <a href="https://nodejs.org/fr/download/" title="Tuto">Nodejs.org </a>  : télécharger la version qui correspond à votre système d'exploitation. Nous choisirons ici celle de Windows 64bits. 
 * Vous pouvez prendre l'IDE de votre choix supportant Node.js, dans notre cas nous utiliserons :  <a href="https://code.visualstudio.com/download" title="Tuto">Visual studio code </a> 
