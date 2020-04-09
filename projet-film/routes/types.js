@@ -14,5 +14,4 @@ router.get('/:types',(req,res)=>{
     });
 });
 
-
 module.exports = router;

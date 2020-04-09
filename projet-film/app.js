@@ -37,6 +37,7 @@ app.use('/',require('./routes/films'));
 app.use('/types', require('./routes/types'));
 
 app.use('/uploads', express.static(__dirname +'/uploads'));
+
 //Configurer nunjucks
 nunjucks.configure('views',{
   // echapper tout les caractères html présent dans les variables

@@ -6,8 +6,6 @@ var typeSchema = new mongoose.Schema({
     collection: 'Types'
 });
 
-//virtual champs non stocké dans la base de données mais qui est utilisable
-//permet de creer un champs calculer ou de definir des relations entre les différents types
 
 typeSchema.virtual('Films',{
     ref:'Films',
